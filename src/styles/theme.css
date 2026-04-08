@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@theme {
+  --color-amber-crt: #ffb429;
+  --color-brown-bg: #140c04;
+  --color-brown-dim: #0a0602;
+  --font-mono: 'Fira Code', 'Courier New', monospace;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-brown-bg);
+    color: var(--color-amber-crt);
+    font-family: var(--font-mono);
+    text-shadow: 0 0 2px rgba(255, 180, 41, 0.3);
+    overflow-x: hidden;
+    line-height: 1.7;
+    letter-spacing: 0.02em;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    text-shadow: 0 0 4px rgba(255, 180, 41, 0.5);
+    letter-spacing: 0.05em;
+  }
+}
+
+@layer components {
+  .crt-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(
+      rgba(18, 16, 16, 0) 50%,
+      rgba(0, 0, 0, 0.2) 50%
+    ), linear-gradient(
+      90deg,
+      rgba(255, 0, 0, 0.03),
+      rgba(0, 255, 0, 0.01),
+      rgba(0, 0, 255, 0.03)
+    );
+    background-size: 100% 4px, 3px 100%;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.08;
+  }
+
+  .crt-flicker {
+    animation: flicker 0.15s infinite;
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    z-index: 101;
+  }
+
+  .dot-matrix {
+    background-image: radial-gradient(var(--color-amber-crt) 1px, transparent 1px);
+    background-size: 24px 24px;
+    opacity: 0.025;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  @keyframes flicker {
+    0% { opacity: 0.02; }
+    5% { opacity: 0.05; }
+    10% { opacity: 0.02; }
+    15% { opacity: 0.06; }
+    20% { opacity: 0.04; }
+    25% { opacity: 0.08; }
+    30% { opacity: 0.06; }
+    35% { opacity: 0.1; }
+    40% { opacity: 0.08; }
+    45% { opacity: 0.12; }
+    50% { opacity: 0.1; }
+    55% { opacity: 0.14; }
+    60% { opacity: 0.12; }
+    65% { opacity: 0.16; }
+    70% { opacity: 0.14; }
+    75% { opacity: 0.18; }
+    80% { opacity: 0.16; }
+    85% { opacity: 0.2; }
+    90% { opacity: 0.18; }
+    95% { opacity: 0.2; }
+    100% { opacity: 0.18; }
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .blink {
+    animation: blink 1s step-end infinite;
+  }
+}
